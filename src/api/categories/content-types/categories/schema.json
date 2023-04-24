@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categoriesp",
+  "info": {
+    "singularName": "categories",
+    "pluralName": "categoriesp",
+    "displayName": "categories",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::products.products",
+      "mappedBy": "category"
+    },
+    "subcategories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subcategoriess.subcategoriess",
+      "mappedBy": "category"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "brandsp",
+  "info": {
+    "singularName": "brands",
+    "pluralName": "brandsp",
+    "displayName": "brands",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::products.products",
+      "mappedBy": "brand"
+    }
+  }
+}

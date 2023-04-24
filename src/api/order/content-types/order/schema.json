@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "phone": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "house": {
+      "type": "string"
+    },
+    "apartment": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "New order",
+        "In process"
+      ],
+      "default": "New order"
+    },
+    "basket": {
+      "displayName": "basket",
+      "type": "component",
+      "repeatable": true,
+      "component": "order.basket"
+    },
+    "total": {
+      "type": "decimal"
+    }
+  }
+}

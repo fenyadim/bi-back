@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_order_baskets",
+  "info": {
+    "displayName": "basket",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "volume": {
+      "type": "integer"
+    },
+    "count": {
+      "type": "integer"
+    }
+  }
+}
