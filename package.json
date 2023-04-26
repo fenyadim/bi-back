@@ -16,7 +16,8 @@
     "@strapi/strapi": "4.9.1",
     "pg": "8.8.0",
     "strapi-plugin-import-export-entries": "^1.18.1",
-    "strapi-plugin-transformer": "^3.1.0"
+    "strapi-plugin-transformer": "^3.1.0",
+    "viber-bot": "^1.0.18"
   },
   "author": {
     "name": "A Strapi developer"
