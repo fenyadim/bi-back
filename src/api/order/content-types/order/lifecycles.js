@@ -1,9 +1,21 @@
-const TextMessage = require("viber-bot").Message.Text;
+const { ViberClient } = require("messaging-api-viber");
 const ViberBot = require("viber-bot").Bot;
 const BotEvents = require("viber-bot").Events;
+const TextMessage = require("viber-bot").Message.Text;
+// const TextMessage = require("viber-bot").Message.Text;
+// const ViberBot = require("viber-bot").Bot;
+// const BotEvents = require("viber-bot").Events;
+
+// const client = new ViberClient({
+//   accessToken: authToken,
+//   sender: {
+//     name: "Sender",
+//   },
+// });
+const authToken = "50f097bd5d67e590-6d218ac0e2d544f-60b2336ed7f33e77";
 
 const bot = new ViberBot({
-  authToken: "50ef6738f327e0c9-c545d37f62e40878-53476091c2e34178",
+  authToken: authToken,
   name: "EchoBot",
   avatar: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Katze_weiss.png",
 });
@@ -14,14 +26,18 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
   response.send(message);
 });
 
+bot.onTextMessage(/^hi|hello$/i, (message, response) =>
+  response.send(
+    new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name}`)
+  )
+);
+
+// Wasn't that easy? Let's create HTTPS server and set the webhook:
 const https = require("https");
-const port = 3002;
+const { default: axios } = require("axios");
+const port = process.env.PORT || 8080;
 
-// Viber will push messages sent to this URL. Web server should be internet-facing.
-
-https
-  .createServer(bot.middleware())
-  .listen(port, () => bot.setWebhook("http://localhost:3001"));
+const webhookUrl = process.env.WEBHOOK_URL;
 
 module.exports = {
   async afterCreate(event) {
@@ -34,18 +50,9 @@ module.exports = {
       Адрес: `${data.city}, ${data.street}, ${data.house}, ${data.apartment}`,
       "Итоговая сумма": data.total,
     };
-    bot.onTextMessage(/^hi|hello$/i, (message, response) =>
-      response.send(
-        new TextMessage(
-          `Hi there ${response.userProfile.name}. I am ${bot.name}`
-        )
-      )
-    );
-    console.log(res);
-    // const { result } = event;
-    // const res = await strapi
-    //   .service("api::order.order")
-    //   .findOne({ id: [result.id] });
-    // console.log(res);
+    // Viber will push messages sent to this URL. Web server should be internet-facing.
+    https
+      .createServer(bot.middleware())
+      .listen(port, () => bot.setWebhook(webhookUrl));
   },
 };
